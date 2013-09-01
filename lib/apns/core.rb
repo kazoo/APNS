@@ -21,17 +21,15 @@ module APNS
   def self.send_notifications(notifications)
     sock, ssl = self.open_connection
 
-    packed_nofications = self.packed_nofications(notifications)
+    packed_notifications = self.packed_notifications(notifications)
 
-    notifications.each do |n|
-      ssl.write(packed_nofications)
-    end
+    ssl.write(packed_notifications)
 
     ssl.close
     sock.close
   end
 
-  def self.packed_nofications(notifications)
+  def self.packed_notifications(notifications)
     bytes = ''
 
     notifications.each do |notification|
